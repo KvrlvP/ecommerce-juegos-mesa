@@ -6,8 +6,11 @@ django.setup()
 
 from django.contrib.auth.models import User
 
-if not User.objects.filter(username='admin').exists():
-    User.objects.create_superuser('admin', 'admin@example.com', 'admin12345')
-    print("✅ Superusuario creado")
-else:
-    print("ℹ️ El superusuario ya existe")
+user, created = User.objects.get_or_create(username='admin', defaults={'email': 'admin@example.com'})
+
+user.set_password('admin12345')
+user.is_staff = True
+user.is_superuser = True
+user.save()
+
+print("✅ Contraseña de admin actualizada correctamente")
