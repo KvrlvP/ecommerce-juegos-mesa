@@ -1,0 +1,492 @@
+/* =========================================
+   1. VARIABLES Y RESET GENERAL
+   ========================================= */
+:root {
+  --primary-color: #6C5CE7; /* Morado principal */
+  --secondary-color: #00B894; /* Verde para botones de compra */
+  --bg-color: #F8F9FA;
+  --text-color: #2D3436;
+  --izipay-color: #00b1a9; /* Verde oficial Izipay */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Esto evita que los inputs se salgan */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* =========================================
+   2. HEADER Y NAVEGACIÓN
+   ========================================= */
+header {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50; 
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+}
+
+.logo h1 {
+  font-size: 1.8rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+nav a:hover, nav a.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* =========================================
+   3. GRID DE PRODUCTOS Y TARJETAS
+   ========================================= */
+main {
+  padding: 2rem 5%;
+  padding-top: 100px; 
+}
+
+#titulo-categoria {
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.producto-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.producto-card:hover {
+  transform: translateY(-5px);
+}
+
+.producto-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.producto-info {
+  padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.producto-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.producto-info p {
+  font-size: 0.9rem;
+  color: #636e72;
+  margin-bottom: 10px;
+}
+
+.precio-stock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.precio {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.stock {
+  font-size: 0.8rem;
+  color: var(--secondary-color);
+}
+
+.btn-comprar {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+}
+
+.btn-comprar:hover {
+  background-color: #00a381;
+}
+
+/* =========================================
+   4. CARRITO SIDEBAR
+   ========================================= */
+.btn-carrito-header {
+  background: white;
+  color: var(--primary-color);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-carrito-header span {
+  background: var(--secondary-color);
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  margin-left: 5px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 998;
+}
+
+.overlay.active {
+  display: block;
+}
+
+.carrito-sidebar {
+  position: fixed;
+  top: 0; right: -400px;
+  width: 350px;
+  height: 100vh;
+  background: white;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease;
+}
+
+.carrito-sidebar.active {
+  right: 0;
+}
+
+.carrito-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-cerrar {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.carrito-items {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.item-carrito {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.item-carrito button {
+  background: #ff7675;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.carrito-footer {
+  padding: 20px;
+  border-top: 2px solid #eee;
+  background: #f8f9fa;
+}
+
+.btn-pagar {
+  width: 100%;
+  padding: 15px;
+  background: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-pagar:hover {
+  background: #00a381;
+}
+
+/* =========================================
+   5. MODAL DE PAGO (PASARELA IZIPAY)
+   ========================================= */
+.modal-pago {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 2000; /* Por encima del sidebar del carrito */
+}
+
+.modal-pago.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-contenido {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.btn-cerrar-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #666;
+}
+
+.btn-cerrar-modal:hover {
+  color: #000;
+}
+
+.modal-contenido h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.monto-pagar {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+#monto-modal {
+  font-weight: bold;
+  color: var(--izipay-color);
+  font-size: 1.3rem;
+}
+
+.form-pago {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-pago label {
+  font-size: 14px;
+  color: #444;
+  font-weight: 600;
+}
+
+.form-pago input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.form-pago input:focus {
+  border-color: var(--izipay-color);
+}
+
+/* Fila para Vencimiento y CVV */
+.fila-datos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.fila-datos div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.btn-pagar-modal {
+  background-color: var(--izipay-color);
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+}
+
+.btn-pagar-modal:hover {
+  background-color: #008f89;
+}
+
+.texto-pruebas {
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-img {
+  width: 70px; 
+  height: 50px;
+  object-fit: cover;
+}
+
+/* =========================================
+   5. MODAL DE PAGO (PASARELA PAYPAL)
+   ========================================= */
+.modal-pago {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto; 
+  z-index: 2000;
+  padding: 40px 0;
+}
+
+.modal-pago.active {
+  display: flex; 
+}
+
+.modal-contenido {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 450px; 
+  min-height: 400px; 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: auto 0; 
+}
+
+.btn-cerrar-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #666;
+  z-index: 10; 
+}
+
+.btn-cerrar-modal:hover {
+  color: #000;
+}
+
+.modal-contenido h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.monto-pagar {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+#monto-modal {
+  font-weight: bold;
+  color: var(--izipay-color);
+  font-size: 1.3rem;
+}
+
+.texto-pruebas {
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+  margin-top: 15px;
+}

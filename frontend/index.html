@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>La Taberna del Dado - Juegos de Mesa</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo" id="inicio-logo" style="cursor: pointer;">
+        <img src="/logo.png" alt="Logo La Taberna del Dado" class="logo-img" />
+        <h1>La Taberna del Dado</h1>
+      </div>
+      <nav>
+        <ul id="categorias-nav">
+          <!-- Las categorías se cargarán aquí con JS, ya no hay "Todos" fijo -->
+        </ul>
+      </nav>
+      <button id="btn-carrito" class="btn-carrito-header">
+        🛒 Carrito <span id="contador-carrito">0</span>
+      </button>
+    </header>
+
+    <main>
+      <h2 id="titulo-categoria">Todos los Juegos</h2>
+      <div class="productos-grid" id="productos-container"></div>
+    </main>
+
+    <div id="carrito-sidebar" class="carrito-sidebar">
+      <div class="carrito-header">
+        <h3>Tu Carrito</h3>
+        <button id="btn-cerrar-carrito" class="btn-cerrar">✖</button>
+      </div>
+      <div id="carrito-items" class="carrito-items">
+        <p>Tu carrito está vacío</p>
+      </div>
+      <div class="carrito-footer">
+        <h3>Total: S/ <span id="carrito-total">0.00</span></h3>
+        <button id="btn-pagar" class="btn-pagar">Pagar con PayPal</button>
+      </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <div id="modal-pago" class="modal-pago">
+      <div class="modal-contenido">
+        <button id="btn-cerrar-modal" class="btn-cerrar-modal">✖</button>
+        <h3>Pago Seguro con PayPal 🛡️</h3>
+        <p class="monto-pagar">Total a pagar: S/ <span id="monto-modal">0.00</span></p>
+        
+        <div id="paypal-button-container"></div>
+        
+        <p class="texto-pruebas">🧪 Modo Sandbox: Usa las cuentas de prueba de PayPal</p>
+      </div>
+    </div>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AZEpQkCnhkf4CiFVCzBtBg-EVKyQxfdwcKnyLg9b5Pc4aqg_kR5nLUxp6M4_g7TQLIHbZ9k2sc180Pxt&currency=USD"></script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
