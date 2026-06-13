@@ -6,11 +6,7 @@ django.setup()
 
 from django.contrib.auth.models import User
 
-user, created = User.objects.get_or_create(username='admin', defaults={'email': 'admin@example.com'})
+User.objects.filter(username='admin').delete()
 
-user.set_password('admin12345')
-user.is_staff = True
-user.is_superuser = True
-user.save()
-
-print("✅ Contraseña de admin actualizada correctamente")
+User.objects.create_superuser('admin', 'admin@example.com', 'admin12345')
+print("✅ Usuario admin creado desde cero con éxito")
